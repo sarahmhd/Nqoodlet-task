@@ -12,7 +12,7 @@
   --bg-color: #f6f9fe;
   --white-color: #ffffff;
   --primary-color: #2e38ff;
-  --secondary-color: #14C0FF;
+  --secondary-color: #14c0ff;
 }
 
 body {
@@ -23,4 +23,28 @@ body {
 
 .container {
   width: 90%;
+}
+
+@media (max-width: 768px) {
+  :root {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  :root {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1223px) {
+  :root {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1224px) {
+  :root {
+    font-size: 18px;
+  }
 }

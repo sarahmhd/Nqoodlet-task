@@ -1,5 +1,7 @@
 import SwitchStatus from "../SwitchStatus";
 import { TStatus } from "../../types";
+import Logo from '/src/assets/images/nqoodlet-logo.svg';
+
 
 const activeStatus: TStatus[] = [
   "all",
@@ -20,7 +22,7 @@ export default function Header() {
       <div className="container m-auto">
         <div className="flex items-center justify-between">
           <a href="#" className="logo">
-            <img className="w-[140px]" src="src/assets/images/nqoodlet-logo.svg" />
+            <img className="w-[140px]" src={Logo} />
           </a>
           <div className="btns flex items-center gap-4">
             <SwitchStatus status={activeStatus} />

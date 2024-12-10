@@ -16,13 +16,13 @@ export default function TaskTabs() {
   return (
     <div className="tabs-section py-12">
       <div className="container m-auto">
-        <ul className="tabs flex items-center gap-4 w-full pb-4 border-b border-solid border-[#e2e6ed]">
+        <div className="tabs flex items-center gap-4 w-full pb-4 border-b border-solid border-[#e2e6ed]">
           {
             tabs.map(tab => (
-              <button className={`capitalize text-xl relative before:content-[''] before:absolute before:transition-[width] before:duration-300 before:bottom-[-1rem] before:h-[3px] before:rounded-full before:bg-[var(--secondary-color)]  ${activeTab === tab.name ? 'before:w-full': 'before:w-0'} hover:before:w-full`} onClick={() => handleTabClick(tab.name)}>{tab.value}</button>
+              <button className={`capitalize text-lg focus-visible:outline-0 relative before:content-[''] before:absolute before:transition-[width] before:duration-300 before:bottom-[-1rem] before:h-[3px] before:rounded-full before:bg-[var(--secondary-color)]  ${activeTab === tab.name ? 'before:w-full': 'before:w-0'} hover:before:w-full`} onClick={() => handleTabClick(tab.name)}>{tab.value}</button>
             ))
           }
-        </ul>
+        </div>
         <ul className="tabs-content mt-8">
           {activeTab === "task" && (
             <div>
