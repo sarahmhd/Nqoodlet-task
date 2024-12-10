@@ -20,3 +20,7 @@ body {
   /* font-family: "Teshrin AR+LT Regular"; */
   font-family: "Teshrin AR+LT Medium";
 }
+
+.container {
+  width: 90%;
+}

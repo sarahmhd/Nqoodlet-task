@@ -19,8 +19,8 @@ export default function Header() {
     <header className="bg-[var(--white-color)] min-h-[70px] p-4 flex items-center justify-between">
       <div className="container m-auto">
         <div className="flex items-center justify-between">
-          <a href="/" className="logo">
-            <img className="w-[140px]" src="/src/assets/images/nqoodlet-logo.svg" />
+          <a href="#" className="logo">
+            <img className="w-[140px]" src="../../../src/assets/images/nqoodlet-logo.svg" />
           </a>
           <div className="btns flex items-center gap-4">
             <SwitchStatus status={activeStatus} />
