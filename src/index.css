@@ -37,14 +37,8 @@ body {
   }
 }
 
-@media (min-width: 992px) and (max-width: 1223px) {
+@media (min-width: 992px) {
   :root {
     font-size: 16px;
-  }
-}
-
-@media (min-width: 1224px) {
-  :root {
-    font-size: 18px;
   }
 }

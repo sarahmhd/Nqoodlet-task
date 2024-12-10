@@ -20,7 +20,7 @@ export default function Card({ card }: CardProps) {
 
       <img className="absolute top-8 right-8 w-[80px]" src={prepaidBankLogo} />
       <div className="card-buttons absolute bottom-8 left-8 w-[calc(100%-4rem)] md:w-[calc(100%-8rem)] md:left-16 flex items-center justify-between">
-        <h6 className={`text-2xl tracking-wide bold ${card.is_physical ? 'text-white' : 'text-[#222]'}`}>{card.last_four}</h6>
+        <h6 className={`text-xl tracking-wide bold ${card.is_physical ? 'text-white' : 'text-[#222]'}`}>{card.last_four}</h6>
         <img className="w-[80px]" src={mastercardLogo} />
       </div>
     </div>
