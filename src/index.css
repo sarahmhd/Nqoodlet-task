@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-color: #f6f9fe;
+  --white-color: #ffffff;
+  --primary-color: #2e38ff;
+  --secondary-color: #14C0FF;
+}
+
+body {
+  /* font-family: "Teshrin AR+LT Bold"; */
+  /* font-family: "Teshrin AR+LT Regular"; */
+  font-family: "Teshrin AR+LT Medium";
+}
