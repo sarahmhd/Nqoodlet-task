@@ -1,0 +1,13 @@
+{
+    "header": {
+        "lang": "English"
+    },
+    "tabs": {
+        "all": "All",
+        "active": "Active",
+        "inactive": "Inactive",
+        "terminated": "Terminated",
+        "physical": "Physical",
+        "digital": "Digital"
+    }
+}

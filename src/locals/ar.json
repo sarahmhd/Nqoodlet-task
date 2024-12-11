@@ -1,0 +1,13 @@
+{
+    "header": {
+        "lang": "العربية"
+    },
+    "tabs": {
+        "all": "الكل",
+        "active": "نشط",
+        "inactive": "غير نشط",
+        "terminated": "منتهية",
+        "physical": "فعلي",
+        "digital": "رقمي"
+    }
+}

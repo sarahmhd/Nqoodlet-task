@@ -19,3 +19,22 @@ export const cards: TCard[] = [
     { id: "5", last_four: "3141", is_physical: true, status: "inactive" },
     { id: "6", last_four: "2232", is_physical: true, status: "active" },
 ];
+
+export const formatCardNumber = (number: number | string) => {
+    let numStr = number.toString();
+
+    // Pad the number to 16 digits if it's shorter
+    if (numStr.length < 16) {
+        numStr = '0'.repeat(16 - numStr.length) + numStr;
+    }
+
+    // Format the number with hyphens after every 4 digits
+    const formatted = numStr.replace(/\d(?=\d{4})/g, 'x');
+    
+    // Mask all digits except the last 4
+    const masked = formatted.replace(/(.{4})(?=.)/g, '$1-');
+
+    return masked;
+};
+
+
