@@ -3,6 +3,7 @@ import { formatCVVNumber, formatCardNumber, formatCardNumberX } from "../../util
 
 import SwitchStatus from "../SwitchStatus";
 import flipIcon from '/src/assets/images/flip.png'
+import goldenBg from '/src/assets/images/gold-texture-wallpaper2.avif'
 import i18n from "../../i18n";
 import mastercardLogo from '/src/assets/images/mastercardLogo.png';
 import physicalCardImage from '/src/assets/images/physicalCard.png';
@@ -32,7 +33,7 @@ const CardFront = ({ card, isChecked }: { card: TCard, isChecked: boolean }) => 
     dir={i18n.dir()}
   >
     <img className={`${i18n.dir() === 'ltr' ? 'ms-auto' : 'me-auto'} top-4 right-4 w-[4rem] max-w-[80px]`} src={prepaidBankLogo} />
-    <h2 className={`${i18n.dir() === 'ltr' ? 'me-auto pe-11' : 'ms-auto'} mt-8 font-[courierNew] font-bold text-2xl bg-[url('./src/assets/images/gold-texture-wallpaper2.avif')] bg-clip-text text-transparent`}>{card.more_details.name}</h2>
+    <h2 className={`${i18n.dir() === 'ltr' ? 'me-auto pe-11' : 'ms-auto'} mt-8 font-[courierNew] font-bold text-2xl bg-clip-text text-transparent`} style={{ backgroundImage: `url(${goldenBg})` }}>{card.more_details.name}</h2>
     <div className={`card-buttons bottom-4 left-0 w-full flex items-center justify-between ${i18n.dir() === 'ltr' ? 'flex-row' : ' flex-row-reverse'} p-0`}>
       <h6 className={`text-sm tracking-wide ${isChecked ? 'tracking-[2px]' : ''} font-semibold ${card.is_physical ? 'text-white' : 'text-[#222]'} uppercase`}>
         {isChecked ? formatCardNumber(card.more_details.full_card_number) : formatCardNumberX(card.last_four)}
@@ -84,7 +85,7 @@ const LockIcon = ({ card }: { card: TCard }) => (
   ) : null
 );
 
-const ShowDetails = ({ card, handleToggle, isChecked }: { card: TCard, handleToggle: () => void, isChecked: boolean}) => (
+const ShowDetails = ({ card, handleToggle, isChecked }: { card: TCard, handleToggle: () => void, isChecked: boolean }) => (
   <div className="flex items-center justify-center gap-4 w-full" dir={i18n.dir()}>
     {
       card.status === 'terminated' ? null : (
@@ -130,7 +131,7 @@ export default function Card({ card }: CardProps) {
         </div>
         <LockIcon card={card} />
       </div>
-      <ShowDetails card={card} handleToggle={handleToggle} isChecked={isChecked}/>
+      <ShowDetails card={card} handleToggle={handleToggle} isChecked={isChecked} />
     </div>
   );
 }

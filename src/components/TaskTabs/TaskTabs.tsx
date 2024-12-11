@@ -9,7 +9,6 @@ import { useTranslation } from "react-i18next";
 export default function TaskTabs() {
   const [activeTab, setActiveTab] = useState<TTabs>("all");
   const cards = useSelector((state: RootState) => state.value)
-  console.log(cards)
   const [filteredCards, setFilteredCards] = useState<TCard[]>(cards)
 
   const { t, i18n } = useTranslation()

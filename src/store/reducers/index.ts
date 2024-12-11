@@ -17,19 +17,18 @@ const reducer = (
     console.log(action)
     switch (action.type) {
         case 'UPDATE_STATUS' :
-            console.log('test')
-            const test = {
+            return {
                 ...state,
-                cards: state.value.map(card =>
+                value: state.value.map(card =>
                     card.id === action.payload.id
                         ? { ...card, status: action.payload.newStatus }
                         : card
                 )
-            }
-            console.log(test)
+            };
+        case 'FILTER_CARDS':
             return {
                 ...state,
-                value: state.value.map(card =>
+                value: state.value.filter(card =>
                     card.id === action.payload.id
                         ? { ...card, status: action.payload.newStatus }
                         : card
