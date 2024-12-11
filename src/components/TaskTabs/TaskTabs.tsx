@@ -1,12 +1,15 @@
 import { TCard, TTabs } from "../../types";
+import { useEffect, useState } from "react";
 
 import CardsList from "../CardsList";
-import { cards } from "../../utils/cardsArray";
-import { useState } from "react";
+import { RootState } from "../../store";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 export default function TaskTabs() {
   const [activeTab, setActiveTab] = useState<TTabs>("all");
+  const cards = useSelector((state: RootState) => state.value)
+  console.log(cards)
   const [filteredCards, setFilteredCards] = useState<TCard[]>(cards)
 
   const { t, i18n } = useTranslation()
@@ -23,7 +26,7 @@ export default function TaskTabs() {
 
   const handleTabClick = (tab: TTabs) => {
     setActiveTab(tab);
-    filterCards(tab)
+    filterCards(tab);
   };
 
   const filterCards = (tab: TTabs) => {
@@ -34,6 +37,10 @@ export default function TaskTabs() {
       setFilteredCards(cards.filter(el => el.status === tab || el.is_physical === newTab))
     }
   };
+
+  useEffect(()=>{
+    setFilteredCards(cards)
+  },[cards])
 
   return (
     <div className="tabs-section py-12" dir={dir}>

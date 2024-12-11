@@ -15,6 +15,11 @@
   --secondary-color: #14c0ff;
 }
 
+@font-face {
+  font-family: courierNew;
+  src: url('/src/assets/fonts/alfont_com_AlFont_com_cour.ttf');
+}
+
 body {
   /* font-family: "Teshrin AR+LT Bold"; */
   /* font-family: "Teshrin AR+LT Regular"; */
@@ -42,3 +47,4 @@ body {
     font-size: 16px;
   }
 }
+

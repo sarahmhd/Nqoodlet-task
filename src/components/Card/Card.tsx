@@ -1,40 +1,51 @@
-import { useState } from "react";
-import { TCard } from "../../types";
+import { TCard, TStatus } from "../../types";
+import { formatCVVNumber, formatCardNumber, formatCardNumberX } from "../../utils/cardsArray";
+
+import SwitchStatus from "../SwitchStatus";
+import flipIcon from '/src/assets/images/flip.png'
+import i18n from "../../i18n";
 import mastercardLogo from '/src/assets/images/mastercardLogo.png';
 import physicalCardImage from '/src/assets/images/physicalCard.png';
-import prepaidBankLogo from '/src/assets/images/prepaidBankLogo.png';
-import virtualCardImage from '/src/assets/images/virtualCard.png';
 import physicalCardImageBg from '/src/assets/images/physicalCard-bg.png';
+import prepaidBankLogo from '/src/assets/images/prepaidBankLogo.png';
+import { useState } from "react";
+import virtualCardImage from '/src/assets/images/virtualCard.png';
 import virtualCardImageBg from '/src/assets/images/virtualCard-bg.png';
-import { formatCardNumber } from "../../utils/cardsArray";
 
 export type CardProps = {
   card: TCard;
 };
 
-const CardFront = ({ card }: { card: TCard }) => (
+const statusArray: TStatus[] = [
+  'active', 'inactive', 'terminated'
+]
+
+const CardFront = ({ card, isChecked }: { card: TCard, isChecked: boolean }) => (
   <div
-    className={`card-front backface-hidden cursor-pointer rounded-[30px] p-8 z-50 absolute h-full w-full aspect-[1.586] max-w-screen bg-cover bg-no-repeat 
+    className={`card-front flex flex-col justify-between backface-hidden cursor-pointer rounded-[30px] py-4 px-5 z-50 absolute h-full w-full aspect-[1.586] max-w-screen bg-cover bg-no-repeat 
       ${card.status === 'inactive' ? 'grayscale' : ''} 
       ${card.status === 'terminated' ? 'blur-[2px]' : ''}`}
     style={{
       backgroundImage: `url(${card.is_physical ? physicalCardImage : virtualCardImage})`,
       backfaceVisibility: 'hidden',
     }}
+    dir={i18n.dir()}
   >
-    <img className="absolute top-4 right-4 w-[6rem] max-w-[80px]" src={prepaidBankLogo} />
-    <div className="card-buttons absolute bottom-4 left-0 w-full ps-8 pe-4 flex items-center justify-between">
-      <h6 className={`text-sm tracking-wide font-bold ${card.is_physical ? 'text-white' : 'text-[#222]'} uppercase`}>
-        {formatCardNumber(card.last_four)}
+    <img className={`${i18n.dir() === 'ltr' ? 'ms-auto' : 'me-auto'} top-4 right-4 w-[4rem] max-w-[80px]`} src={prepaidBankLogo} />
+    <h2 className={`${i18n.dir() === 'ltr' ? 'me-auto pe-11' : 'ms-auto'} mt-8 font-[courierNew] font-bold text-2xl bg-[url('./src/assets/images/gold-texture-wallpaper2.avif')] bg-clip-text text-transparent`}>{card.more_details.name}</h2>
+    <div className={`card-buttons bottom-4 left-0 w-full flex items-center justify-between ${i18n.dir() === 'ltr' ? 'flex-row' : ' flex-row-reverse'} p-0`}>
+      <h6 className={`text-sm tracking-wide ${isChecked ? 'tracking-[2px]' : ''} font-semibold ${card.is_physical ? 'text-white' : 'text-[#222]'} uppercase`}>
+        {isChecked ? formatCardNumber(card.more_details.full_card_number) : formatCardNumberX(card.last_four)}
       </h6>
-      <img className="w-[6rem] max-w-[80px]" src={mastercardLogo} />
+      <img className="w-[4rem] max-w-[80px]" src={mastercardLogo} />
     </div>
+    <img src={flipIcon} className="absolute top-[calc(50%-2rem)] right-[5px] invert-[1] transform translate-y-1/2 w-11 cursor-pointer" />
   </div>
 );
 
-const CardBack = ({ card }: { card: TCard }) => (
+const CardBack = ({ card, isChecked }: { card: TCard, isChecked: boolean }) => (
   <div
-    className={`card-back absolute backface-hidden cursor-pointer rounded-[30px] p-8 z-10 aspect-[1.586] max-w-screen w-full h-full inset-0 bg-cover bg-no-repeat 
+    className={`card-back flex flex-col justify-between absolute backface-hidden cursor-pointer rounded-[30px] aspect-[1.586] max-w-screen w-full h-full inset-0 bg-cover bg-no-repeat 
       ${card.status === 'inactive' ? 'grayscale' : ''} 
       ${card.status === 'terminated' ? 'blur-[2px]' : ''}`}
     style={{
@@ -42,7 +53,20 @@ const CardBack = ({ card }: { card: TCard }) => (
       backgroundImage: `url(${card.is_physical ? physicalCardImageBg : virtualCardImageBg})`,
       backfaceVisibility: 'hidden',
     }}
-  />
+    dir={i18n.dir()}
+  >
+    <div className="black w-full h-[20%] mt-8" style={{
+      backgroundImage: "linear-gradient(45deg,  #2b2b2b, #1c1c1c 40%, #2b2b2b 70%, #1c1c1c )"
+    }}></div>
+
+    <div className={`info flex justify-between items-center py-4 px-5 mt-8 ${i18n.dir() === 'ltr' ? 'flex-row' : 'flex-row-reverse'}`}>
+      <h2 className={` ${i18n.dir() === 'ltr' ? 'pe-11' : 'ps-11'} font-[courierNew] font-bold text-lg text-wrap text-center bg-[url('./src/assets/images/gold-texture-wallpaper2.avif')] bg-clip-text text-transparent`}>{card.more_details.name}</h2>
+      <span className={`cvv uppercase flex items-center gap-2 text-[#222] ${i18n.dir() === 'ltr' ? 'flex-row' : 'flex-row-reverse'}`}>
+        <span>cvv</span>
+        <span>{isChecked ? card.more_details.cvv_number : formatCVVNumber(card.more_details.cvv_number)}</span>
+      </span>
+    </div>
+  </div >
 );
 
 const LockIcon = ({ card }: { card: TCard }) => (
@@ -60,6 +84,24 @@ const LockIcon = ({ card }: { card: TCard }) => (
   ) : null
 );
 
+const ShowDetails = ({ card, handleToggle, isChecked }: { card: TCard, handleToggle: () => void, isChecked: boolean}) => (
+  <div className="flex items-center justify-center gap-4 w-full" dir={i18n.dir()}>
+    {
+      card.status === 'terminated' ? null : (
+        <div className="flex items-center gap-2">
+          <span className="text-sm">{i18n.t('showDetails')}</span>
+          <div className="switch" >
+            <label htmlFor="switch" onClick={handleToggle} className={`toggler relative w-[60px] h-[30px] rounded-full flex items-center cursor-pointer border-2 border-solid border-[#f8f8f8] transition-[background,left] duration-300 ${isChecked ? 'bg-[var(--secondary-color)]' : 'bg-[#222] '}`}>
+              <input checked={isChecked} onChange={handleToggle} type="checkbox" className={`appearance-none border-none outline-0 relative w-[22px] h-[22px] bg-[var(--secondary-color)] checked:bg-[#222] duration-500  rounded-full top-[0] z-10 pointer-events-none flex items-center justify-center ${i18n.dir() === 'ltr' ? 'left-[2px] checked:left-[calc(50%+2px)]  transition-[background,left]' : 'right-[2px] checked:right-[calc(50%+2px)]  transition-[background,right]'}`} name="switch" id="switch" />
+            </label>
+          </div>
+        </div>
+      )
+    }
+    <SwitchStatus initialStatus={card.status} status={statusArray} id={card.id} />
+  </div>
+)
+
 export default function Card({ card }: CardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
@@ -72,6 +114,7 @@ export default function Card({ card }: CardProps) {
     setIsChecked(prev => !prev)
   };
 
+
   return (
     <div className="lg:col-span-4 sm:col-span-6 col-span-12">
       <div className={`card mb-4 relative perspective-[1000px] aspect-[1.586] ${card.status === 'terminated' ? 'pointer-events-none' : ''}`} onClick={handleFlip}>
@@ -82,25 +125,12 @@ export default function Card({ card }: CardProps) {
             transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
           }}
         >
-          <CardFront card={card} />
-          <CardBack card={card} />
+          <CardFront card={card} isChecked={isChecked} />
+          <CardBack card={card} isChecked={isChecked} />
         </div>
         <LockIcon card={card} />
       </div>
-      <div className="flex items-center justify-center w-full">
-        {
-          card.status === 'terminated' ? null : (
-            <div className="flex items-center gap-2">
-              <span>show details</span>
-              <div className="switch" >
-                <label htmlFor="switch" onClick={handleToggle} className={`toggler w-[60px] h-[30px] rounded-full flex items-center cursor-pointer border-2 border-solid border-[#f8f8f8] transition-[background,left] duration-300 ${isChecked ? 'bg-[var(--secondary-color)]' : 'bg-[#222] '}`}>
-                  <input checked={isChecked} onChange={handleToggle} type="checkbox" className="appearance-none border-none outline-0 relative w-[24px] h-[24px] bg-red-700 rounded-full left-[2px] top-[50%] transform translate-y-[-50%] z-10 pointer-events-none flex items-center justify-center" name="switch" id="switch" />
-                </label>
-              </div>
-            </div>
-          )
-        }
-      </div>
+      <ShowDetails card={card} handleToggle={handleToggle} isChecked={isChecked}/>
     </div>
   );
 }

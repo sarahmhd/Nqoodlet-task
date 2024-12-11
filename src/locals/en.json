@@ -9,5 +9,6 @@
         "terminated": "Terminated",
         "physical": "Physical",
         "digital": "Digital"
-    }
+    },
+    "showDetails": "Show Details"
 }
