@@ -1,4 +1,5 @@
 import { TCard } from "../../types";
+import { UPDATE_STATUS } from "../actions";
 import { cards } from "../../utils/cardsArray";
 
 export interface Cards {
@@ -9,26 +10,15 @@ const initialState = {
     value: cards,
 }
 
-
 const reducer = (
     state = initialState,
     action: any
 ) => {
-    console.log(action)
     switch (action.type) {
-        case 'UPDATE_STATUS' :
+        case UPDATE_STATUS:
             return {
                 ...state,
                 value: state.value.map(card =>
-                    card.id === action.payload.id
-                        ? { ...card, status: action.payload.newStatus }
-                        : card
-                )
-            };
-        case 'FILTER_CARDS':
-            return {
-                ...state,
-                value: state.value.filter(card =>
                     card.id === action.payload.id
                         ? { ...card, status: action.payload.newStatus }
                         : card
@@ -38,5 +28,7 @@ const reducer = (
             return state;
     }
 }
+
+
 
 export default reducer

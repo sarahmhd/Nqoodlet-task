@@ -33,12 +33,12 @@ const CardFront = ({ card, isChecked }: { card: TCard, isChecked: boolean }) => 
     dir={i18n.dir()}
   >
     <img className={`${i18n.dir() === 'ltr' ? 'ms-auto' : 'me-auto'} top-4 right-4 w-[4rem] max-w-[80px]`} src={prepaidBankLogo} />
-    <h2 className={`${i18n.dir() === 'ltr' ? 'me-auto pe-11' : 'ms-auto'} mt-8 font-[courierNew] font-bold text-2xl bg-clip-text text-transparent`} style={{ backgroundImage: `url(${goldenBg})` }}>{card.more_details.name}</h2>
+    <h2 className={`${i18n.dir() === 'ltr' ? 'me-auto pe-11' : 'ms-auto'} mt-8 font-[courierNew] font-bold text-2xl lg:text-lg xl:text-2xl bg-clip-text text-transparent`} style={{ backgroundImage: `url(${goldenBg})` }}>{card.more_details.name}</h2>
     <div className={`card-buttons bottom-4 left-0 w-full flex items-center justify-between ${i18n.dir() === 'ltr' ? 'flex-row' : ' flex-row-reverse'} p-0`}>
-      <h6 className={`text-sm tracking-wide ${isChecked ? 'tracking-[2px]' : ''} font-semibold ${card.is_physical ? 'text-white' : 'text-[#222]'} uppercase`}>
+      <h6 className={`text-sm lg:text-[0.75rem] xl:text-sm tracking-wide ${isChecked ? 'tracking-[2px]' : ''} font-semibold ${card.is_physical ? 'text-white' : 'text-[#222]'} uppercase`}>
         {isChecked ? formatCardNumber(card.more_details.full_card_number) : formatCardNumberX(card.last_four)}
       </h6>
-      <img className="w-[4rem] max-w-[80px]" src={mastercardLogo} />
+      <img className="w-[4rem] max-w-[80px] lg:w-[3rem] xl:w-[4rem] " src={mastercardLogo} />
     </div>
     <img src={flipIcon} className="absolute top-[calc(50%-2rem)] right-[5px] invert-[1] transform translate-y-1/2 w-11 cursor-pointer" />
   </div>
@@ -76,7 +76,7 @@ const LockIcon = ({ card }: { card: TCard }) => (
       className={`lock-icon w-full h-full absolute inset-0 z-10 flex items-center justify-center 
         ${card.is_physical ? 'text-[#d1cccc]' : 'text-[#605b5b]'}`}
     >
-      <svg className="w-[3rem] h-[3rem]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none">
+      <svg className="w-[3rem] h-[3rem] lg:w-[2rem] lg:h-[2rem] xl:w-[3rem] xl:h-[3rem]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none">
         <path d="M12 16.5V14.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
         <path d="M4.2678 18.8447C4.49268 20.515 5.87612 21.8235 7.55965 21.9009C8.97626 21.966 10.4153 22 12 22C13.5847 22 15.0237 21.966 16.4403 21.9009C18.1239 21.8235 19.5073 20.515 19.7322 18.8447C19.8789 17.7547 20 16.6376 20 15.5C20 14.3624 19.8789 13.2453 19.7322 12.1553C19.5073 10.485 18.1239 9.17649 16.4403 9.09909C15.0237 9.03397 13.5847 9 12 9C10.4153 9 8.97626 9.03397 7.55965 9.09909C5.87612 9.17649 4.49268 10.485 4.2678 12.1553C4.12104 13.2453 3.99999 14.3624 3.99999 15.5C3.99999 16.6376 4.12104 17.7547 4.2678 18.8447Z" stroke="currentColor" strokeWidth="1.5" />
         <path d="M7.5 9V6.5C7.5 4.01472 9.51472 2 12 2C14.4853 2 16.5 4.01472 16.5 6.5V9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
