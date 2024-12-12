@@ -33,7 +33,7 @@ const CardFront = ({ card, isChecked }: { card: TCard, isChecked: boolean }) => 
     dir={i18n.dir()}
   >
     <img className={`${i18n.dir() === 'ltr' ? 'ms-auto' : 'me-auto'} top-4 right-4 w-[4rem] max-w-[80px]`} src={prepaidBankLogo} />
-    <h2 className={`${i18n.dir() === 'ltr' ? 'me-auto pe-11' : 'ms-auto'} mt-8 font-[courierNew] font-bold text-2xl lg:text-lg xl:text-2xl bg-clip-text text-transparent`} style={{ backgroundImage: `url(${goldenBg})` }}>{card.more_details.name}</h2>
+    <h2 className={`${i18n.dir() === 'ltr' ? 'me-auto pe-11' : 'ms-auto'} mt-8 font-[courierNew] font-bold text-2xl lg:text-lg xl:text-2xl bg-clip-text text-transparent bg-no-repeat box-decoration-clone`} style={{ backgroundImage: `url(${goldenBg})` }}>{card.more_details.name}</h2>
     <div className={`card-buttons bottom-4 left-0 w-full flex items-center justify-between ${i18n.dir() === 'ltr' ? 'flex-row' : ' flex-row-reverse'} p-0`}>
       <h6 className={`text-sm lg:text-[0.75rem] xl:text-sm tracking-wide ${isChecked ? 'tracking-[2px]' : ''} font-semibold ${card.is_physical ? 'text-white' : 'text-[#222]'} uppercase`}>
         {isChecked ? formatCardNumber(card.more_details.full_card_number) : formatCardNumberX(card.last_four)}
@@ -61,7 +61,7 @@ const CardBack = ({ card, isChecked }: { card: TCard, isChecked: boolean }) => (
     }}></div>
 
     <div className={`info flex justify-between items-center py-4 px-5 mt-8 ${i18n.dir() === 'ltr' ? 'flex-row' : 'flex-row-reverse'}`}>
-      <h2 className={` ${i18n.dir() === 'ltr' ? 'pe-11' : 'ps-11'} font-[courierNew] font-bold text-lg text-wrap text-center bg-[url('./src/assets/images/gold-texture-wallpaper2.avif')] bg-clip-text text-transparent`}>{card.more_details.name}</h2>
+      <h2 className={` ${i18n.dir() === 'ltr' ? 'pe-11' : 'ps-11'} font-[courierNew] font-bold text-lg text-wrap text-center bg-[url('./src/assets/images/gold-texture-wallpaper2.avif')] bg-clip-text text-transparent box-decoration-clone`} style={{ backgroundImage: `url(${goldenBg})` }}>{card.more_details.name}</h2>
       <span className={`cvv uppercase flex items-center gap-2 text-[#222] ${i18n.dir() === 'ltr' ? 'flex-row' : 'flex-row-reverse'}`}>
         <span>cvv</span>
         <span>{isChecked ? card.more_details.cvv_number : formatCVVNumber(card.more_details.cvv_number)}</span>
